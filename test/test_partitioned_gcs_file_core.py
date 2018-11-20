@@ -1,6 +1,6 @@
 import unittest
 
-from core.partitioned_gcs_file_core import PartitionedGCSFileCore
+from core import PartitionedGCSFileCore
 
 
 class TestPartitionedGCSFileCore(unittest.TestCase):

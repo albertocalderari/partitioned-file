@@ -1,6 +1,6 @@
 from os.path import join
 
-from core.partitioned_file_core import PartitionedFileCore
+from partitioned_file_core import PartitionedFileCore
 
 
 class PartitionedGCSFileCore(PartitionedFileCore):

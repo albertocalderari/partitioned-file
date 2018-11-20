@@ -1,4 +1,4 @@
-from core.file_with_size import FileWithSize
+from file_with_size import FileWithSize
 
 
 class PartitionedFileCore(object):
