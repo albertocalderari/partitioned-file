@@ -1,3 +1,5 @@
 gcsfs==0.1.2
 dask==0.20.0
 toolz==0.9.0
+setuptools==40.6.2
+versioneer==0.18
