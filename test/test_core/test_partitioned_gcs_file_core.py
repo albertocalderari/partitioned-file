@@ -10,5 +10,3 @@ class TestPartitionedGCSFileCore(unittest.TestCase):
     def test_gcs_full_path(self):
         actual = self.pf.gcs_full_path
         self.assertEqual(actual, "gs://bucket/key/hello_0.txt")
-
-

@@ -10,6 +10,7 @@ class PartitionedFile(PartitionedFileCore):
     def __enter__(self):
         file_handle = open(self.file_name, 'wb')
         self.set_file_handle(file_handle)
+        self.add_file_to_registry()
         return self
 
     @classmethod
@@ -25,9 +26,9 @@ class PartitionedGzipFile(PartitionedFileCore):
     def __enter__(self):
         file_handle = GzipFile(fileobj=open(self.file_name, 'wb'), mode='wb')
         self.set_file_handle(file_handle)
+        self.add_file_to_registry()
         return self
 
     @classmethod
     def open(cls, file_path, partition_size=64 * 1024 * 1024):
         return cls(file_path, partition_size).__enter__()
-

@@ -13,6 +13,7 @@ class PartitionedGCSFile(PartitionedGCSFileCore):
         gcs_filesystem = gcsfs.GCSFileSystem(project=self.project_id)
         h = gcs_filesystem.open(self.gcs_full_path, 'wb')
         self.set_file_handle(h)
+        self.add_file_to_registry()
         return self
 
     @classmethod
@@ -29,6 +30,7 @@ class PartitionedGCSGzipFile(PartitionedGCSFileCore):
         h1 = gcs_filesystem.open(self.gcs_full_path, 'wb')
         h = GzipFile(fileobj=h1, mode='wb')
         self.set_file_handle(h)
+        self.add_file_to_registry()
         return self
 
     @classmethod

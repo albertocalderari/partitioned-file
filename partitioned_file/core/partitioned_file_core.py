@@ -14,7 +14,6 @@ class PartitionedFileCore(object):
         self._file_object.write(payload)
         self._file_object.flush()
         if self.is_greater_than_max_partition_size:
-            self.add_file_to_registry()
             self.close()
             self._idx += 1
             self.__enter__()
