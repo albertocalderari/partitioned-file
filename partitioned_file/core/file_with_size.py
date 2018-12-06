@@ -3,7 +3,7 @@ class FileWithSize(object):
         self._file_obj = file_obj
 
     @property
-    def written_bytes(self):
+    def size(self):
         if hasattr(self._file_obj, 'fileobj'):
             return self._file_obj.fileobj.tell()
         else:

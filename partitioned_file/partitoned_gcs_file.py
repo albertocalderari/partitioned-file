@@ -15,6 +15,10 @@ class PartitionedGCSFile(PartitionedGCSFileCore):
         self.set_file_handle(h)
         return self
 
+    @classmethod
+    def open(cls, project_id, bucket, file_path, partition_size=64 * 1024 * 1024):
+        return cls(project_id, bucket, file_path, partition_size).__enter__()
+
 
 class PartitionedGCSGzipFile(PartitionedGCSFileCore):
     def __init__(self, project_id, bucket, file_path, partition_size=64 * 1024 * 1024):
@@ -26,3 +30,7 @@ class PartitionedGCSGzipFile(PartitionedGCSFileCore):
         h = GzipFile(fileobj=h1, mode='wb')
         self.set_file_handle(h)
         return self
+
+    @classmethod
+    def open(cls, project_id, bucket, file_path, partition_size=64 * 1024 * 1024):
+        return cls(project_id, bucket, file_path, partition_size).__enter__()

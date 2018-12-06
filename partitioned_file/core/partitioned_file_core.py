@@ -18,8 +18,8 @@ class PartitionedFileCore(object):
 
     @property
     def is_greater_than_max_partition_size(self):
-        print self.file_handle.written_bytes
-        return self.file_handle.written_bytes > self._partition_size
+        print self.file_handle.size
+        return self.file_handle.size > self._partition_size
 
     @property
     def file_name(self):
@@ -29,8 +29,9 @@ class PartitionedFileCore(object):
     def file_handle(self):
         return self._file_handle
 
-    def open(self):
-        return self.__enter__()
+    @classmethod
+    def open(cls, *args, **kwargs):
+        raise NotImplemented("PartitionedFileCore is an interface!")
 
     def set_file_handle(self, handle):
         self._file_handle = FileWithSize(handle)
