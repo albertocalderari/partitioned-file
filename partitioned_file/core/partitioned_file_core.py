@@ -18,6 +18,7 @@ class PartitionedFileCore(object):
 
     @property
     def is_greater_than_max_partition_size(self):
+        print self.file_handle.written_bytes
         return self.file_handle.written_bytes > self._partition_size
 
     @property

@@ -1,25 +1,19 @@
 class FileWithSize(object):
-    def __init__(self, file_handle):
-        self._file_handle = file_handle
-        self._written_bytes = 0
+    def __init__(self, file_obj):
+        self._file_obj = file_obj
 
     @property
     def written_bytes(self):
-        return self._written_bytes
+        if hasattr(self._file_obj, 'fileobj'):
+            return self._file_obj.fileobj.tell()
+        else:
+            return self._file_obj.tell()
 
     def write(self, payload):
-        self._file_handle.write(payload)
-        self.increment_written_bytes(payload)
-
-    @staticmethod
-    def n_bytes(payload):
-        return len(payload.encode('utf8'))
-
-    def increment_written_bytes(self, payload):
-        self._written_bytes += self.n_bytes(payload)
+        self._file_obj.write(payload)
 
     def close(self):
-        self._file_handle.close()
+        self._file_obj.close()
 
     def flush(self):
-        self._file_handle.flush()
+        self._file_obj.flush()

@@ -15,7 +15,7 @@ class PartitionedFile(PartitionedFileCore):
 
 class PartitionedGzipFile(PartitionedFileCore):
     def __init__(self, file_path, partition_size=64 * 1024 * 1024):
-        super(PartitionedFileCore, self).__init__(file_path, partition_size)
+        super(PartitionedGzipFile, self).__init__(file_path, partition_size)
         self.file_path = file_path
 
     def __enter__(self):
