@@ -5,6 +5,7 @@ class FileWithSize(object):
     @property
     def size(self):
         if hasattr(self._file_obj, 'fileobj'):
+            # use the internal object when writing to a gzip file to get the correct size
             return self._file_obj.fileobj.tell()
         else:
             return self._file_obj.tell()
