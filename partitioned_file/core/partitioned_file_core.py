@@ -6,11 +6,11 @@ class PartitionedFileCore(object):
         self._file_path = file_path
         self._partition_size = partition_size
         self._idx = 0
-        self._file_handle = None
+        self._file_object = None
 
     def write(self, payload):
-        self._file_handle.write(payload)
-        self._file_handle.flush()
+        self._file_object.write(payload)
+        self._file_object.flush()
         if self.is_greater_than_max_partition_size:
             self.close()
             self._idx += 1
@@ -18,23 +18,23 @@ class PartitionedFileCore(object):
 
     @property
     def is_greater_than_max_partition_size(self):
-        print self.file_handle.size
-        return self.file_handle.size > self._partition_size
+        print self.file_object.size
+        return self.file_object.size > self._partition_size
 
     @property
     def file_name(self):
         return self._file_path.replace('*', str(self._idx))
 
     @property
-    def file_handle(self):
-        return self._file_handle
+    def file_object(self):
+        return self._file_object
 
     @classmethod
     def open(cls, *args, **kwargs):
         raise NotImplemented("PartitionedFileCore is an interface!")
 
-    def set_file_handle(self, handle):
-        self._file_handle = FileWithSize(handle)
+    def set_file_handle(self, file_obj):
+        self._file_object = FileWithSize(file_obj)
 
     def __enter__(self):
         raise NotImplemented("PartitionedFileCore is an interface!")
@@ -43,5 +43,5 @@ class PartitionedFileCore(object):
         self.__exit__()
 
     def __exit__(self, *args, **kwargs):
-        self._file_handle.close()
+        self._file_object.close()
 
