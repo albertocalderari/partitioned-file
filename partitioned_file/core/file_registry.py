@@ -1,6 +1,6 @@
 class FileRegistry(object):
-    def __init__(self, items=[]):
-        self._items = items
+    def __init__(self):
+        self._items = list()
 
     @property
     def items(self):
@@ -10,7 +10,8 @@ class FileRegistry(object):
         return self.__add__(item)
 
     def __add__(self, item):
-        self.items.append(item)
+        if item not in self._items:
+            self._items.append(item)
 
     def __iter__(self):
         for i in self.items:
